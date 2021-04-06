@@ -1,0 +1,9 @@
+server:
+  port: 8000
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: realcoding-1
