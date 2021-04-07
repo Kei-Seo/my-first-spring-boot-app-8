@@ -1,7 +1,9 @@
 package org.cnu.realcoding.homework.myfirstspringbootapp8.service;
 import lombok.Getter;
+import org.cnu.realcoding.homework.myfirstspringbootapp8.exception.DogFindDuplication;
 import org.cnu.realcoding.homework.myfirstspringbootapp8.exception.DogNotFoundException;
 import org.cnu.realcoding.homework.myfirstspringbootapp8.domain.Dog;
+import org.cnu.realcoding.homework.myfirstspringbootapp8.exception.DogNotPermission;
 import org.cnu.realcoding.homework.myfirstspringbootapp8.repository.DogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,7 +63,7 @@ public class DogManagementService {
         for(Dog value : dogs) {
             if(value.getOwnerPhoneNumber().equals(dog.getOwnerPhoneNumber())&&
                     value.getName().equals(dog.getName())&&value.getOwnerName().equals(dog.getOwnerName())){
-                throw new DogNotFoundException();
+                throw new DogFindDuplication();
             }
         }
         dogRepository.insertDog(dog);
@@ -72,4 +74,12 @@ public class DogManagementService {
     }
 
 
+    public void updateDog(String name, Dog dog_after) {
+        Dog dog = dogRepository.findDogByName(name);
+        if(dog.getMedicalRecords().containsAll(dog_after.getMedicalRecords())) {
+            dogRepository.updateDog(dog, dog_after);
+        } else{
+            throw new DogNotPermission();
+        }
+    }
 }

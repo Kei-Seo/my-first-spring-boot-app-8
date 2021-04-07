@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,4 +42,23 @@ public class DogRepository {
                         Dog.class
                 );
     }
+
+    public void updateDog(Dog dog, Dog dog_after){
+        Query query = new Query();
+        Update update = new Update();
+        query.addCriteria(Criteria.where("name").is(dog.getName()));
+        query.addCriteria(Criteria.where("kind").is(dog.getKind()));
+        query.addCriteria(Criteria.where("ownerName").is(dog.getOwnerName()));
+        query.addCriteria(Criteria.where("ownerPhoneNumber").is(dog.getOwnerPhoneNumber()));
+
+        update.set("name", dog_after.getName());
+        update.set("kind", dog_after.getKind());
+        update.set("ownerName", dog_after.getOwnerName());
+        update.set("ownerPhoneNumber", dog_after.getOwnerPhoneNumber());
+
+        mongoTemplate.updateMulti(query, update, Dog.class);
+
+
+    }
+
 }
