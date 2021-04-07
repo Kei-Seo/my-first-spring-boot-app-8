@@ -55,4 +55,14 @@ public class DogController {
     public void updateDog(@RequestParam String name, @RequestBody Dog dog_after){
         dogManagementService.updateDog(name, dog_after);
     }
+
+    @PostMapping("/updateKind")
+    public void updateKind(@RequestParam String name, @RequestParam String kind){
+        dogManagementService.updateKind(name, kind);
+    }
+
+    @PostMapping("/dogs/addRecode")
+    public void insertMedicalRecords(@RequestParam String name, @RequestParam String record) {
+        dogManagementService.insertDogMedicalRecords(name, record);
+    }
 }

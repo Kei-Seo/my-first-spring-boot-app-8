@@ -58,7 +58,29 @@ public class DogRepository {
 
         mongoTemplate.updateMulti(query, update, Dog.class);
 
+    }
 
+    public void updateKind(Dog dog, String kind){
+        Query query = new Query();
+        Update update = new Update();
+        query.addCriteria(Criteria.where("kind").is(dog.getKind()));
+
+        update.set("kind", kind);
+        mongoTemplate.updateFirst(query, update, Dog.class);
+    }
+
+    public void DogMedicalRecordUpdate(Dog dog){
+        Query query = new Query();
+        Update update = new Update();
+
+        query.addCriteria(Criteria.where("name").is(dog.getName()));
+        query.addCriteria(Criteria.where("kind").is(dog.getKind()));
+        query.addCriteria(Criteria.where("ownerName").is(dog.getOwnerName()));
+        query.addCriteria(Criteria.where("ownerPhoneNumber").is(dog.getOwnerPhoneNumber()));
+
+        update.set("medicalRecords", dog.getMedicalRecords());
+
+        mongoTemplate.updateMulti(query, update, Dog.class);
     }
 
 }
