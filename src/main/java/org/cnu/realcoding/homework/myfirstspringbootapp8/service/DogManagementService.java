@@ -82,4 +82,20 @@ public class DogManagementService {
             throw new DogNotPermission();
         }
     }
+
+    public void updateKind(String name, String kind){
+        Dog dog = getDogByName(name);
+        dogRepository.updateKind(dog, kind);
+    }
+
+    public void insertDogMedicalRecords(String name, String record) {
+        Dog dog = dogRepository.findDogByName(name);
+        if(dog == null) {
+            throw new DogNotFoundException();
+        }else{
+            dog.getMedicalRecords().add(record);
+            dogRepository.DogMedicalRecordUpdate(dog);
+        }
+    }
+
 }
