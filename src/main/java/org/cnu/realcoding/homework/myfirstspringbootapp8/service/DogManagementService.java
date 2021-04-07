@@ -56,19 +56,15 @@ public class DogManagementService {
     }
 
     public void insertDog(Dog dog) {
-
         List<Dog> dogs = dogRepository.findAllDog();
         Dog find_dog = null;
-
         for(Dog value : dogs) {
             if(value.getOwnerPhoneNumber().equals(dog.getOwnerPhoneNumber())&&
                     value.getName().equals(dog.getName())&&value.getOwnerName().equals(dog.getOwnerName())){
                 throw new DogNotFoundException();
             }
         }
-
         dogRepository.insertDog(dog);
-
     }
 
     public List<Dog> getAllDogs() {
