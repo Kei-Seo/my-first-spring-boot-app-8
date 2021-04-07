@@ -23,15 +23,31 @@ public class DogController {
     public void createDog(@RequestBody Dog dog){
         dogManagementService.insertDog(dog);
     }
+
     @GetMapping("/dogs")
     public List<Dog> getAllDogs(){
         return dogManagementService.getAllDogs();
     }
 
     //강아지 이름 가지고 호출
-    @GetMapping("/dogs/{name}")
+    @GetMapping("/dogs/findWith{name}")
     public Dog getDogByName(@PathVariable String name){
         return dogManagementService.getDogByName(name);
     }
 
+    @GetMapping("/dogs/{ownerName}pet")
+    public Dog getDogByOwnerName(@PathVariable String ownerName){
+        return dogManagementService.getDogByOwnerName(ownerName);
+    }
+
+    @GetMapping("/dogs/phoneNumber{ownerPhoneNumber}")
+    public Dog getDogByOwnerPhoneNumber(@PathVariable String ownerPhoneNumber){
+        return dogManagementService.getDogByOwnerPhoneNumber(ownerPhoneNumber);
+    }
+
+
+    @GetMapping("/dogsWith")
+    public Dog getDogByAllInfo(@RequestParam String name, @RequestParam String ownerName, @RequestParam String ownerPhoneNumber){
+        return dogManagementService.getDogByAllInfo(name, ownerName, ownerPhoneNumber);
+    }
 }

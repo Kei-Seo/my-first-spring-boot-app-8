@@ -13,7 +13,7 @@ import java.util.List;
 public class DogRepository {
     @Autowired
     private MongoTemplate mongoTemplate;
-    public Dog findDog(String name) {
+    public Dog findDogByName(String name) {
         return mongoTemplate
                 .findOne(Query.query(Criteria.where("name").is(name)),
                         Dog.class
@@ -26,5 +26,19 @@ public class DogRepository {
 
     public List<Dog> findAllDog() {
         return mongoTemplate.findAll(Dog.class);
+    }
+
+    public Dog findDogByOwnerName(String ownerName) {
+        return mongoTemplate
+                .findOne(Query.query(Criteria.where("ownerName").is(ownerName)),
+                        Dog.class
+                );
+    }
+
+    public Dog findDogByOwnerPhoneNumber(String ownerPhoneNumber) {
+        return mongoTemplate
+                .findOne(Query.query(Criteria.where("ownerPhoneNumber").is(ownerPhoneNumber)),
+                        Dog.class
+                );
     }
 }
