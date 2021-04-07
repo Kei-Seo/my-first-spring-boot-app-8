@@ -51,6 +51,7 @@ public class DogController {
         return dogManagementService.getDogByAllInfo(name, ownerName, ownerPhoneNumber);
     }
 
+    // 원래 진료기록 같은 값으로 넣어줘야 함.(empty x)
     @PostMapping("/update")
     public void updateDog(@RequestParam String name, @RequestBody Dog dog_after){
         dogManagementService.updateDog(name, dog_after);

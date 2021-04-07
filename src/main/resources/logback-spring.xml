@@ -4,9 +4,9 @@
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
     <appender name="dailyRollingFileAppender"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/var/log/cnu/my-first-spring-boot-app-1.log</file>
+        <file>/var/log/cnu/my-first-spring-boot-app-8.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/var/log/cnu/my-first-spring-boot-app-1-%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
+            <fileNamePattern>/var/log/cnu/my-first-spring-boot-app-8-%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
             <maxHistory>720</maxHistory>
         </rollingPolicy>
         <encoder>
